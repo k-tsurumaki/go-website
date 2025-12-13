@@ -1,1 +1,4 @@
 k-tsurumaki-key.pem
+# Lambda build artifacts
+bootstrap
+lambda-deployment.zip
