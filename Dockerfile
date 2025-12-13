@@ -20,6 +20,9 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o server main.go
 # ================================
 FROM alpine:3.20
 
+# Lambda Web Adapter を追加
+COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.9.0 /lambda-adapter /opt/extensions/lambda-adapter
+
 WORKDIR /app
 
 # ビルドしたバイナリをコピー
@@ -28,8 +31,8 @@ COPY --from=builder /app/server .
 # templates ディレクトリをコピー
 COPY --from=builder /app/templates ./templates
 
-# ポート公開（デフォルト8080）
-EXPOSE 8080
+# Lambda Web Adapter 有効化
+ENV PORT=8080
 
 # 本番実行コマンド
 CMD ["./server"]
