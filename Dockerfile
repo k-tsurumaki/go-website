@@ -29,7 +29,7 @@ COPY --from=builder /app/server .
 COPY --from=builder /app/templates ./templates
 
 # ポート公開（デフォルト8080）
-EXPOSE 8080
+EXPOSE 80
 
 # 本番実行コマンド
 CMD ["./server"]
